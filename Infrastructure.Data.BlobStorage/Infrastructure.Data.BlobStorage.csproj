@@ -12,6 +12,8 @@
     <PackageReleaseNotes>Blob Storage Repository based on Microsoft sample</PackageReleaseNotes>
     <NeutralLanguage>pt-BR</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/m4cm3nz/Infrastructure.Data.BlobStorage.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/m4cm3nz/Infrastructure.Data.BlobStorage.git</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
