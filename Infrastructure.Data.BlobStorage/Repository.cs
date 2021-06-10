@@ -2,10 +2,10 @@
 using Infrastructure.Data.Abstractions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -62,8 +62,7 @@ namespace Infrastructure.Data.BlobStorage
 
             await WriteJsonAsync(
                 memoryStream,
-                content,
-                new UTF8Encoding());
+                content);
 
             await Upload(memoryStream, fileName);
         }
@@ -109,29 +108,26 @@ namespace Infrastructure.Data.BlobStorage
             }
             catch (Exception ex)
             {
-                var value = (content is string) ? content.ToString() : JsonConvert.SerializeObject(content);
+                var value = (content is string) ? content.ToString() : JsonSerializer.Serialize(content);
                 LogMessages.UploadFailed(logger, typeof(T).FullName, fileName, value, ex);
                 return null;
             }
         }
 
-        private static async Task WriteJsonAsync<T>(
-            Stream stream,
-            T @object,
-            Encoding encoding = default,
-            CancellationToken cancellationToken = default,
-            int bufferSize = 1024,
-            bool leaveOpen = true,
-            bool resetStream = true)
+        public static async Task WriteJsonAsync<T>(
+           Stream stream,
+           T @object,
+           CancellationToken cancellationToken = default,
+           bool resetStream = true)
         {
+
             if (!stream.CanWrite)
                 throw new NotSupportedException("Can't read from stream.");
 
-            encoding ??= new UTF8Encoding();
-            using var streamWriter = new StreamWriter(stream, encoding, bufferSize, leaveOpen);
-            using var jsonTextWriter = new JsonTextWriter(streamWriter);
-            new JsonSerializer().Serialize(jsonTextWriter, @object);
-            await jsonTextWriter.FlushAsync(cancellationToken);
+            await JsonSerializer.SerializeAsync(stream, @object, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            }, cancellationToken);
 
             if (resetStream && stream.CanSeek)
                 stream.Seek(0, SeekOrigin.Begin);
