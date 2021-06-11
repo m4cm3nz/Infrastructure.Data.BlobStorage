@@ -9,12 +9,14 @@
     <Description>A .NET Core 3.1 BlobStorage Repository based on Microsoft samples</Description>
     <RepositoryType>c#</RepositoryType>
     <PackageTags>repository blobstorage azure</PackageTags>
-    <PackageReleaseNotes>Blob Storage Repository based on Microsoft sample</PackageReleaseNotes>
+    <PackageReleaseNotes>Newtonsoft removed
+Update serialization method
+Add a Test Project</PackageReleaseNotes>
     <NeutralLanguage>pt-BR</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/m4cm3nz/Infrastructure.Data.BlobStorage.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/m4cm3nz/Infrastructure.Data.BlobStorage.git</PackageProjectUrl>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

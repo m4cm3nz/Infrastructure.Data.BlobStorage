@@ -5,7 +5,9 @@ using Microsoft.Extensions.Options;
 using System;
 using System.IO;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Unicode;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -120,13 +122,14 @@ namespace Infrastructure.Data.BlobStorage
            CancellationToken cancellationToken = default,
            bool resetStream = true)
         {
-
             if (!stream.CanWrite)
                 throw new NotSupportedException("Can't read from stream.");
 
             await JsonSerializer.SerializeAsync(stream, @object, new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                WriteIndented = true
             }, cancellationToken);
 
             if (resetStream && stream.CanSeek)
