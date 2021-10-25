@@ -1,2 +1,2 @@
 # Infrastructure.Data.BlobStorage
-.Net Core Blob Storage Repository based on Microsoft sample
+.Net 5.0 Blob Storage Repository based on Microsoft sample
