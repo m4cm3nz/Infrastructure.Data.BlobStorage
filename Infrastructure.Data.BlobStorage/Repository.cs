@@ -1,4 +1,5 @@
-﻿using Azure.Storage.Blobs;
+﻿using Azure.Identity;
+using Azure.Storage.Blobs;
 using Infrastructure.Data.Abstractions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -29,7 +30,10 @@ namespace Infrastructure.Data.BlobStorage
 
             this.logger = logger ?? throw new Exception("No logger provider was defined.");
 
-            blobServiceClient = new BlobServiceClient(options.Value.ConnectionString);
+            blobServiceClient = options.Value.UseDefaultAzureCredential ?
+                new BlobServiceClient(new Uri(options.Value.UrlContainer), new DefaultAzureCredential()) :
+                new BlobServiceClient(options.Value.ConnectionString);
+
             container = options.Value.Container;
         }
         private BlobClient GetBlobClientFrom(string fileName)

@@ -10,6 +10,7 @@ namespace Infrastructure.Data.BlobStorage.Tests
         public string Message { get; set; }
     }
 
+    //TODO: Write some descent tests
     public class BlobStorageRepositoryTests
     {
         [Test]
