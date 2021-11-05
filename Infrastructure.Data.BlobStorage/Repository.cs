@@ -13,8 +13,8 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Data.BlobStorage
-{
-    public class BlobStorageRepository : IBlobStorage
+{    
+    public class BlobStorageRepository : IBlobStorage, IDownloadContent
     {
         private readonly ILogger<BlobStorageRepository> logger;
         private readonly BlobServiceClient blobServiceClient;
@@ -78,6 +78,21 @@ namespace Infrastructure.Data.BlobStorage
             var blobContainerClient = await CreateContainerIfNotExistsAsync(container);
             var blobClient = blobContainerClient.GetBlobClient(fileName);
             await blobClient.UploadAsync(stream, true);
+        }
+
+        public async Task<BinaryData> DownloadContent(string fileName)
+        {
+            try
+            {
+                var blobClient = GetBlobClientFrom(fileName);
+                var response = await blobClient.DownloadContentAsync();
+                return response.Value.Content;
+            }
+            catch (Exception ex)
+            {
+                LogMessages.DownloadFailed(logger, fileName, ex);
+                return null;
+            }
         }
 
         public async Task<Stream> Download(string fileName)

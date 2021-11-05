@@ -9,20 +9,20 @@
     <Description>A .NET 5.0 BlobStorage Repository based on Microsoft samples</Description>
     <RepositoryType>c#</RepositoryType>
     <PackageTags>repository blobstorage azure</PackageTags>
-    <PackageReleaseNotes>Added support to DefaultAzureCredential</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support do download BinaryData content</PackageReleaseNotes>
     <NeutralLanguage>pt-BR</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/m4cm3nz/Infrastructure.Data.BlobStorage.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/m4cm3nz/Infrastructure.Data.BlobStorage.git</PackageProjectUrl>
-    <Version>2.0.2</Version>
-    <AssemblyVersion>2.0.2.0</AssemblyVersion>
-    <FileVersion>2.0.2.0</FileVersion>
+    <Version>2.0.3</Version>
+    <AssemblyVersion>2.0.3.0</AssemblyVersion>
+    <FileVersion>2.0.3.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.5.0" />
     <PackageReference Include="Azure.Storage.Blobs" Version="12.10.0" />
-    <PackageReference Include="Infrastructure.Data.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Infrastructure.Data.Abstractions" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
