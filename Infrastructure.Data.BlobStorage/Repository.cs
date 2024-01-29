@@ -13,16 +13,23 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Data.BlobStorage
-{    
+{
     public class BlobStorageRepository : IBlobStorage, IDownloadContent
     {
         private readonly ILogger<BlobStorageRepository> logger;
         private readonly BlobServiceClient blobServiceClient;
         private readonly string container;
 
+        private readonly JsonSerializerOptions _jsonSerializerOptions = new()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+            WriteIndented = true
+        };
+
         public BlobStorageRepository(
-            IOptions<Settings> options,
-            ILogger<BlobStorageRepository> logger)
+                IOptions<Settings> options,
+                ILogger<BlobStorageRepository> logger)
         {
 
             if (options?.Value == null)
@@ -68,7 +75,8 @@ namespace Infrastructure.Data.BlobStorage
 
             await WriteJsonAsync(
                 memoryStream,
-                content);
+                content,
+                _jsonSerializerOptions);
 
             await Upload(memoryStream, fileName);
         }
@@ -138,18 +146,14 @@ namespace Infrastructure.Data.BlobStorage
         public static async Task WriteJsonAsync<T>(
            Stream stream,
            T @object,
-           CancellationToken cancellationToken = default,
-           bool resetStream = true)
+           JsonSerializerOptions jsonSerializerOptions = default,
+           bool resetStream = true,
+           CancellationToken cancellationToken = default)
         {
             if (!stream.CanWrite)
                 throw new NotSupportedException("Can't read from stream.");
 
-            await JsonSerializer.SerializeAsync(stream, @object, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
-                WriteIndented = true
-            }, cancellationToken);
+            await JsonSerializer.SerializeAsync(stream, @object, jsonSerializerOptions, cancellationToken);
 
             if (resetStream && stream.CanSeek)
                 stream.Seek(0, SeekOrigin.Begin);
