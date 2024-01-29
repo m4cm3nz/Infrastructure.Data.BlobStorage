@@ -1,31 +1,33 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Authors>Rafael Mac Menz</Authors>
-    <Company>McMenz IT</Company>
-    <Description>A .NET 8.0 BlobStorage Repository based on Microsoft samples</Description>
-    <RepositoryType>c#</RepositoryType>
-    <PackageTags>repository blobstorage azure</PackageTags>
-    <PackageReleaseNotes>Added support do download BinaryData content</PackageReleaseNotes>
-    <NeutralLanguage>pt-BR</NeutralLanguage>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/m4cm3nz/Infrastructure.Data.BlobStorage.git</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/m4cm3nz/Infrastructure.Data.BlobStorage.git</PackageProjectUrl>
-    <Version>8.0.0</Version>
-    <AssemblyVersion>8.0.0.0</AssemblyVersion>
-    <FileVersion>8.0.0.0</FileVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<Authors>Rafael Mac Menz</Authors>
+		<Company>McMenz IT</Company>
+		<Description>A .NET 8.0 BlobStorage Repository based on Microsoft samples</Description>
+		<RepositoryType>c#</RepositoryType>
+		<PackageTags>repository blobstorage azure</PackageTags>
+		<PackageReleaseNotes>Upgrade to .NET 8.0</PackageReleaseNotes>
+		<NeutralLanguage>pt-BR</NeutralLanguage>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/m4cm3nz/Infrastructure.Data.BlobStorage.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/m4cm3nz/Infrastructure.Data.BlobStorage.git</PackageProjectUrl>
+		<Version>8.0.0</Version>
+		<AssemblyVersion>8.0.0.0</AssemblyVersion>
+		<FileVersion>8.0.0.0</FileVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Azure.Identity" Version="1.10.4" />
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
-    <PackageReference Include="Infrastructure.Data.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Azure.Identity" Version="1.10.4" />
+		<PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
+		<PackageReference Include="Infrastructure.Data.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="8.0.1" />
+		<None Include="..\readme.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 
 </Project>
